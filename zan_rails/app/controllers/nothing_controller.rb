@@ -1,0 +1,3 @@
+class NothingController < ApplicationController
+   
+end

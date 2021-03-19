@@ -1,0 +1,43 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= form.label "是否發佈" %>
+    <%= form.check_box :is_available %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, style: "width:100%" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, style: "width:100%", :rows => 10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label "上傳圖檔" %>
+    <%= form.file_field :pimage, :accept => '.png, .jpg, .jpeg, .gif' %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label "建立人" %>
+    <%= current_user.name %>
+    <%= form.text_field :user_id, value: current_user.id, style: "display:none" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

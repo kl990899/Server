@@ -1,0 +1,56 @@
+<h1>上傳使用者CVS或XLSX</h1>
+<% if !flash[:notice].blank? %>   
+  <div>   
+      <%= flash[:notice] %>   
+  </div>   
+<% end %>  
+<table style="width:100%" border="1">   
+  <thead>   
+      <tr>   
+        <th>檔案名稱</th>   
+        <th>Download Link</th>
+        <th colspan="2">Action</th>
+        <th>上傳日期</th>
+      </tr>   
+  </thead>   
+      
+  <tbody>   
+      <% @resumes.each do |resume| %>   
+            
+        <tr>
+            <td><%= resume.name %></td>   
+            <td><%= link_to "Download", resume.attachment_url %></td>   
+            <td><%= link_to "Delete",  resume, method: :delete, confirm: "Are you sure you want to delete #{resume.name}?" %></td>   
+            <td><%= link_to "Import",  import_coffee_path(resume), class: 'btn', title: "匯入資料", data: { confirm: "確定要將表格 #{resume.name} 匯入 User 並且合併嗎 ?" }  %></td>   
+                
+            <td><%= resume.created_at %></td>   
+        </tr>   
+            
+      <% end %>   
+  </tbody>   
+      
+</table>
+  
+    <% if !@resume.errors.empty? %>   
+        <div> 
+            <ul>   
+                <% @resume.errors.full_messages.each do |msg| %>   
+                    <li><%= msg %></li>   
+                <% end %>      
+            </ul>   
+        </div>   
+    <% end %>   
+    <br>
+    <div>   
+        <%= form_for @resume, html: { multipart: true } do |f| %>   
+            <%= f.label :name %>   
+            <%= f.text_field :name %>   
+            <br><br>   
+            <%= f.label :attachment %>   
+            <%= f.file_field :attachment, :accept => '.xlsx,.csv' %>   
+            <br>   
+            <%= f.submit "上傳" %>   
+        <% end %>   
+    </div>      
+    <br>
+<%= link_to 'Back', users_path %>

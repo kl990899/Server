@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<style>
+.white_text{
+}
+</style>
+<html>
+  <head>
+    <title>ZanRails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="icon" href="/assets/test.ico" type="image/x-icon" /> 
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <p>
+      <div class="pull-right" style="padding-right:15px">&nbsp </div>
+      <% if user_signed_in? %>
+        <%= link_to 'Logout', destroy_user_session_path, method: "delete", class: "btn btn-default btn-secondary  pull-right" %>
+        <div class="pull-right" style="padding-right:15px">Welcome!&nbsp 
+          <% if current_user.name.blank? %>
+            <%= current_user.email %>
+          <% else %>
+            <%= current_user[:name] %>
+          <% end %>    
+        </div>
+      <% else %>
+        <%= link_to 'Login', new_user_session_path, class: "btn btn-default btn-primary pull-right white_text" %>
+      <% end %>
+      &nbsp state:<%= notice %><p class="alert"><%= alert %></p>
+    </p>
+
+    <hr>
+    <div class="container">
+    <%= yield %>
+    </div>
+  </body>
+  <hr>  
+  <footer>
+    <h1>&nbsp<%= link_to 'Home', root_path, class: "btn btn-lg btn-info" %></h1>
+  </footer>
+</html>

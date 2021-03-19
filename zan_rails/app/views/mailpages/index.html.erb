@@ -1,0 +1,63 @@
+
+<style>
+.container{
+    padding-left: 0;
+    margin-left: 15% ;
+}
+.green {
+    color: green;
+}
+.blue {
+    color: blue;
+}
+</style>
+
+  <h1>郵件列表</h1>
+
+  <%= link_to "撰寫郵件", new_mailpage_path, class: "btn btn-default btn-primary" %>
+  <br><br>
+  <%= paginate @mails %>
+
+  <table border="1" class="table table-hover">
+    <thead>
+      <tr class="d-flex">
+        <td><input type="checkbox" onClick="toggle(this)" value="checked" /></td>
+        <td style="white-space:nowrap;">已寄出</td>
+        <td style="white-space:nowrap;">寄件人</td>
+        <td>主旨</td>
+        <td class="col-1">內容</td>
+        <td style="white-space:nowrap;">附加檔案</td>
+        <td style="white-space:nowrap;">預約時間</td>
+        <td style="white-space:nowrap;">建立日期</td>
+        <td colspan="3">action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @mails.each do |mail| %>
+      <tr>
+        <td><input type="checkbox" name="foo" value="checked" /></td>
+        <td align="center"><% if mail.been_mail? %><span class="glyphicon glyphicon-ok green"></span><% else %><span class="glyphicon glyphicon-dashboard blue"></span><% end %></td>
+        <td><%= mail.sender %></td>
+        <td style="white-space:nowrap;"><%= mail.subject[0...9] %><%= if mail.subject.length > 9 then ' ....' else '' end %></td>
+        <%# style="text-overflow:ellipsis" %>
+        <td style="white-space:nowrap;"><%= mail.content[0...28] %><%= if mail.content.length > 28 then ' ....' else '' end %></td>
+        <%# paperclip %>
+        <td align="center"><% if !mail.attachment_file.blank? %><span class="glyphicon glyphicon-paperclip"></span><% end %></td>
+        <td style="white-space:nowrap;"><%= mail.appointment.try(:strftime, "%Y-%m-%d %I:%M") %></td>
+        <td style="white-space:nowrap;"><%= mail.created_at.try(:strftime, "%Y-%m-%d %I:%M") %></td>
+        <td style="white-space:nowrap;"><%= link_to '寄件備份', edit_mailpage_path(mail) %></td>
+        <td><%= link_to 'Destroy', mail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<script language="JavaScript">
+  function toggle(source) {
+    checkboxes = document.getElementsByName('foo');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+      checkboxes[i].checked = source.checked;
+    }
+  }
+</script>

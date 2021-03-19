@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts kkk</h1>
+
+
+<%= link_to '新增文章', new_post_path, class: "btn btn-default btn-primary" %>
+<br>
+<br>
+<%= form_tag posts_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "查詢標題、文章、建立人..." %>
+    <%= submit_tag "Search", name: nil %>
+<% end %>
+<br>
+
+<table border="1" style="width:100%">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Is available</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= post.is_available %></td>
+        <td><%= post.user.name %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<p>
+  Download table:
+  <%= link_to '<span class="glyphicon glyphicon-save" style="color:white;" aria-hidden="true"></span>'.html_safe, "/posts/output", format: "csv", :method => :post, class: 'btn', style: 'background-color: #555555;', title: "匯出資料", data: {toggle: "tooltip", placement: "bottom"} %>
+</p>

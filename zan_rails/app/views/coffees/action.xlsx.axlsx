@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Buttons") do |sheet|
+  sheet.add_row %w(name email tel encrypted_password)
+  @buttons.each do |button|
+    sheet.add_row [button.name, button.email, button.tel, button.encrypted_password]
+  end
+end

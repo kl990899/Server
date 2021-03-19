@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<h1>Users</h1>
+<div class="pull-right">
+  <p>
+    Import CSV or XLSX:
+    <%= link_to '<span class="glyphicon glyphicon-cloud-upload"
+  style="color:white;" aria-hidden="true"></span>'.html_safe, new_resume_path, class: 'btn', style: 'background-color: #555555;', title: "匯入資料"%>
+  </p>
+</div>
+
+
+<table style="width:100%" border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Tel</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.tel %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Mail', mail_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%# link_to 'New User', new_user_path %>
+<p>
+    Download XLSX:
+    <%= link_to '<span class="glyphicon glyphicon-save"
+style="color:white;" aria-hidden="true"></span>'.html_safe, action_coffees_path(format: :xlsx, params: request.parameters), class: 'btn', style: 'background-color: #555555;', title: "匯出資料", data: {toggle: "tooltip", placement: "bottom"} %>
+    CSV:
+    <%= link_to '<span class="glyphicon glyphicon-save"
+style="color:white;" aria-hidden="true"></span>'.html_safe, coffees_path(format: :csv, params: request.parameters), class: 'btn', style: 'background-color: #555555;', title: "匯出資料", data: {toggle: "tooltip", placement: "bottom"} %>
+    PDF:
+    <%= link_to '<span class="glyphicon glyphicon-save"
+  style="color:white;" aria-hidden="true"></span>'.html_safe, coffees_path(format: :pdf, params: request.parameters), method: "get", class: 'btn', style: 'background-color: #555555;', title: "匯出資料", data: {toggle: "tooltip", placement: "bottom"} %>
+  
+</p>

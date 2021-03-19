@@ -1,0 +1,70 @@
+
+<script>
+  function getFileData(myFile){  
+    let file_name = document.getElementsByName('table')[0].value.substring(12)
+    document.getElementById('import_name').innerHTML = file_name;
+    extension = file_name.split(".")[1];
+    if (extension == 'csv' || extension == 'xlsx'){
+      document.getElementById('import').style.display="block"; 
+      document.getElementById('import_error').style.display="none";
+    } else if ( extension == null ) {
+      document.getElementById('import_name').innerHTML = '匯入商品 （.csv／.xlsx）';
+      document.getElementById('import').style.display="none"; 
+      document.getElementById('import_error').style.display="none";
+    } else {
+      document.getElementById('import').style.display="none"; 
+      document.getElementById('import_error').style.display="block";
+    }
+  }
+</script>
+<h1>
+    商品列表
+    <%= link_to '購物車', cart_path, class: "btn btn-default btn-warning pull-right" %>
+</h1>
+
+&nbsp
+<%= simple_form_for @product, :url => '/products/import', :method => :post, html: { multipart: true } do |f| %>
+  <%= f.submit value: '匯入', class: 'btn pull-right btn btn-default btn-success', title: "匯入", style: "display:none", id: "import" %>
+
+  <label class="pull-right btn btn-default btn-danger" id="import_error" style="display:none">
+    檔案錯誤
+  </label>
+  <label class="pull-right btn btn-default btn-primary" onchange="getFileData(this);" id="file_lable" style="margin-right:5px">
+    <span id='import_name'>匯入商品 （.csv／.xlsx）</span>
+    <span class="glyphicon glyphicon-paperclip"></span>
+    <span style="display:none;">
+      <%= f.file_field :productCsv, required: true, name: 'table', :accept => '.xlsx,.csv' %>
+    </span>
+  </label>
+<% end %>
+&nbsp
+
+<%= link_to '新增商品', new_product_path, class: "btn btn-default btn-primary" %>
+<%= link_to '清空購物車', clear_cart_path, method: "post", class: "btn btn-xs btn-danger" %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>商品名稱</td>
+      <td>描述</td>
+      <td>售價</td>
+      <td>處理</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+    <tr>
+      <td>
+        <%= link_to '放到購物車', add_cart_path(product), method: "post", class: "btn btn-xs btn-success" %>
+        <%= product.title %>
+      </td>
+      <td><%= product.description %></td>
+      <td><%= product.price %></td>
+      <td>
+        <%= link_to '編輯', edit_product_path(product), class: "btn btn-xs btn-default" %>
+        <%= link_to '刪除', product, method: "delete", data: { confirm: "確定刪除?" }, class: "btn btn-xs btn-default" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

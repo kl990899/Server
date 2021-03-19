@@ -1,0 +1,143 @@
+
+---
+ar_internal_metadata:
+  columns:
+  - key
+  - value
+  - created_at
+  - updated_at
+  records: 
+  - - environment
+    - development
+    - '2021-02-26 03:35:01.610389'
+    - '2021-02-26 03:35:01.610389'
+
+---
+candidates:
+  columns:
+  - id
+  - name
+  - party
+  - age
+  - politics
+  - votes
+  - created_at
+  - updated_at
+  - vote_logs_count
+  records: 
+  - - 1
+    - TOM
+    - ''
+    - 25
+    - ''
+    - 0
+    - '2021-02-26 03:55:38.609503'
+    - '2021-02-26 03:55:38.609503'
+    - 2
+  - - 2
+    - Jhon
+    - KKK
+    - 55
+    - ''
+    - 0
+    - '2021-02-26 03:55:49.013152'
+    - '2021-02-26 03:55:49.013152'
+    - 
+
+---
+posts:
+  columns:
+  - id
+  - title
+  - content
+  - is_available
+  - user_id
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - tom's journey
+    - FAR FAR FAR AWAY
+    - true
+    - 2
+    - '2021-03-02 09:34:09.272724'
+    - '2021-03-02 09:34:09.272724'
+  - - 2
+    - 新文章標題0001
+    - 新文章標題0001新文章標題0001
+    - true
+    - 1
+    - '2021-03-02 09:34:24.773622'
+    - '2021-03-02 09:34:24.773622'
+
+---
+products:
+  columns:
+  - id
+  - title
+  - description
+  - price
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - apple
+    - sweet
+    - 20
+    - '2021-03-02 07:22:41.272308'
+    - '2021-03-03 05:40:45.077648'
+  - - 2
+    - banana
+    - soft
+    - 8
+    - '2021-03-02 07:22:51.807341'
+    - '2021-03-02 07:22:51.807341'
+  - - 3
+    - pepepopo
+    - pepopepo
+    - 17
+    - '2021-03-02 07:23:02.269036'
+    - '2021-03-02 07:23:02.269036'
+
+---
+users:
+  columns:
+  - id
+  - name
+  - email
+  - tel
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - Micky
+    - kl990899@ggg.com
+    - '0123456789'
+    - '2021-03-02 09:33:41.774459'
+    - '2021-03-02 09:33:41.774459'
+  - - 2
+    - TOM
+    - tommail123@123.com
+    - '02365478'
+    - '2021-03-02 09:33:49.367189'
+    - '2021-03-02 09:33:49.367189'
+
+---
+vote_logs:
+  columns:
+  - id
+  - candidate_id
+  - ip_address
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - 1
+    - 192.168.26.164
+    - '2021-02-26 03:55:56.820401'
+    - '2021-02-26 03:55:56.820401'
+  - - 2
+    - 1
+    - 192.168.26.164
+    - '2021-03-02 08:10:22.246623'
+    - '2021-03-02 08:10:22.246623'

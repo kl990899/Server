@@ -1,0 +1,14 @@
+
+
+<%= simple_form_for mail, html: { multipart: true } do |f| %>
+  <%= f.input :sender, label: "寄件人(僅能輸入名稱@後省略)", :wrapper_html => { class: 'pull-right' }, label_html: { class: 'title' } %>
+  <%= f.input :addressee, label: "收件人(Mailgun測試信箱固定)", disabled: true, :input_html => { value: "kl990899@amastek.com" }, label_html: { class: 'title' } %>
+  <br>
+  <%= f.input :subject, label: "主旨", as: :text, :input_html => { class: 'test', :cols => 5, :rows => 1 } %>
+  <%= f.input :content, label: "內文", as: :text, :input_html => { class: 'test', :cols => 5, :rows => 10 } %>
+  <%= f.label :attachment_file ,:label => "附加檔案" %>   
+  <%= f.file_field :attachment_file %>   
+  <br>
+  <%= f.input :appointment, label: "預約寄送日期", label_html: { class: 'title' } %>
+  <%= f.submit value: '寄出', class: "btn btn-default btn-primary" %>
+<% end %>

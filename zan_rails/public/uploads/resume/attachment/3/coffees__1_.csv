@@ -1,0 +1,2 @@
+id,name,email,tel,encrypted_password,reset_password_token,reset_password_sent_at,remember_created_at
+,Micky2,kl9908992@ggg.com,0123456789,$2a$12$8ygf1jPDy/cO5GESHiISSOJuPet.axx5rL9q7HXB/NOMMkaRw2yPm2,d9a5dad674d7af0177bd99d621c9424f02cb600b6ad40013227440ef3e99bad1,2021-03-04 08:45:35 UTC,

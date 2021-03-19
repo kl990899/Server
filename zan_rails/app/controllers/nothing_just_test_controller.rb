@@ -1,0 +1,2 @@
+class NothingJustTestController < ApplicationController
+end
